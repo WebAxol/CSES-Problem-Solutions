@@ -1,4 +1,4 @@
-// Problem reference: https://cses.fi/problemset/task/1643
+// Problem reference: https://cses.fi/problemset/task/1633
 
 #include <bits/stdc++.h>
 #define fastIo() ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
@@ -20,27 +20,21 @@ typedef pair<int,int> pii;
 
 void solve() {
     
+    const int MOD = 1e9 + 7;
+
     ll n;
     cin >> n;
 
-    vl prefix(n + 1);
-    prefix[0] = 0;
+    vl dp(n + 1);
+    dp[0] = 1;
 
-    for(int i = 1; i <= n; i++){ 
-        int num;
-        cin >> num;
-        prefix[i] = prefix[i - 1] + num; 
+    for(int i = 1; i <= n; i++){
+        for(int j = 1; j <= 6; j++){
+            dp[i] += (i >= j) ? dp[i - j] % MOD : 0;
+        }
     }
 
-    ll l = 0;
-    ll maxSum = -__LONG_LONG_MAX__;
-
-    for(ll r = 1; r <= n; r++){
-        maxSum = max(maxSum, prefix[r] - prefix[l]);
-        if(prefix[r] <= prefix[l]) l = r;
-    }
-
-    cout << maxSum << endl;
+    cout << dp[n] % MOD << endl;
 }
 
 int main() {

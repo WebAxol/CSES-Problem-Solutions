@@ -1,3 +1,5 @@
+// Problem reference: https://cses.fi/problemset/task/1621
+
 #include <bits/stdc++.h>
 #define fastIo() ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 
@@ -16,23 +18,23 @@ typedef vector<bool> vb;
 typedef vector<string> vs;
 typedef pair<int,int> pii;
 
+
 void solve() {
-    
-    const int MOD = 1e9 + 7;
 
-    ll n;
+    int n;
     cin >> n;
-
-    vl dp(n + 1);
-    dp[0] = 1;
-
-    for(int i = 1; i <= n; i++){
-        for(int j = 1; j <= 6; j++){
-            dp[i] += (i >= j) ? dp[i - j] % MOD : 0;
-        }
+ 
+    set<int> unique;
+ 
+    for(int i; i < n; i++){
+ 
+        int num;
+        cin >> num;
+ 
+        unique.insert(num);
     }
-
-    cout << dp[n] % MOD << endl;
+ 
+    cout << unique.size();
 }
 
 int main() {
